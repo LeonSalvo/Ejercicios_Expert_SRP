@@ -5,49 +5,37 @@ namespace Library
 {
     public class AppointmentService
     {
-        public static string CreateAppointment(string name, string id, string phoneNumber, DateTime date, string appoinmentPlace, string doctorName)
+        public string appoinmentPlace {get; set;}
+
+        public static string CreateAppointment(DateTime date, string appoinmentPlace, Doctor doctor, Paciente paciente)
         {
-            StringBuilder stringBuilder = new StringBuilder("Scheduling appointment...\n");
+            StringBuilder stringBuilder = new StringBuilder("Creando consulta...\n");
             Boolean isValid = true;
 
-            if (string.IsNullOrEmpty(name))
+            if (doctor.IsValid == false)
             {
-                stringBuilder.Append("Unable to schedule appointment, 'name' is required\n");
+                stringBuilder.Append("No es posible crear la consulta, faltan datos del doctor\n");
                 isValid = false;
             }
-
-            if (string.IsNullOrEmpty(id))
+            if (paciente.IsValid == false)
             {
-                stringBuilder.Append("Unable to schedule appointment, 'id' is required\n");
+                stringBuilder.Append("No es posible crear la consulta, faltan datos del paciente\n");
                 isValid = false;
             }
-
-            if (string.IsNullOrEmpty(phoneNumber))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'phone number' is required\n");
-                isValid = false;
-            }
-
             if (string.IsNullOrEmpty(appoinmentPlace))
             {
-                stringBuilder.Append("Unable to schedule appointment, 'appoinment place' is required\n");
-                isValid = false;
-            }
-
-
-            if (string.IsNullOrEmpty(doctorName))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'doctor name' is required\n");
+                stringBuilder.Append("No es posible crear la consulta, falta el lugar de la consulta\n");
                 isValid = false;
             }
 
             if (isValid)
             {
-                stringBuilder.Append("Appoinment scheduled");
+                stringBuilder.Append("Consulta creada.");
             }
-
             return stringBuilder.ToString();
         }
 
+
     }
 }
+
